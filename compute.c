@@ -22,9 +22,7 @@ CAMLprim value stub_compute(value vN)
     float *x = (float *) calloc(N, sizeof(float));
     float *y = (float *) calloc(N, sizeof(float));
     if (x == NULL || y == NULL) exit(1);
-    memset(x, 1, sizeof(x));
-    for (int i = 0; i < N; ++i)
-        x[i] = i;
+    memset(x, 1, sizeof(float) * N);
 
     omp_set_num_threads(NUM_THREADS);
     #pragma omp parallel for schedule(static)

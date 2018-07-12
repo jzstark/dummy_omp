@@ -12,10 +12,8 @@ int main ()
     float *x = (float *) calloc(N, sizeof(float));
     float *y = (float *) calloc(N, sizeof(float));
     if (x == NULL || y == NULL) exit(1);
-    memset(x, 1, sizeof(x));
-    for (int i = 0; i < N; ++i)
-        x[i] = i;
-             
+    memset(x, 1, sizeof(float) * N);
+
     //start_time = omp_get_wtime();
     omp_set_num_threads(NUM_THREADS);
     #pragma omp parallel for schedule(static)
@@ -27,7 +25,7 @@ int main ()
     //printf("\n pi with %ld size is %lf in %lf seconds\n ", N, y[1], run_time);
 
     return 0;
-}     
+}
 
 
 // Compile: `gcc -fopenmp sin.c -lm`
