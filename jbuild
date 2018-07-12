@@ -1,0 +1,15 @@
+(jbuild_version 1)
+
+(library (
+  (name dummy)
+  (public_name dummy)
+  (wrapped false)
+  (c_names (compute))
+  (c_flags (-fopenmp))
+  (c_library_flags (-lm -lgomp))
+  (flags   (:standard -safe-string))
+  (libraries (
+    ctypes
+    ctypes.stubs
+  ))
+))
