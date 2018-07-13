@@ -14,15 +14,19 @@
 #include <omp.h>
 #define NUM_THREADS 4
 
-CAMLprim value stub_compute(value vN)
+CAMLprim value stub_compute(value vN, value vX, value vY)
 {
-    CAMLparam1(vN);
+    CAMLparam3(vN, vX, vY);
+
+    struct caml_ba_array *X = Caml_ba_array_val(vX);
+    float *x = (float *) X->data;
+    struct caml_ba_array *Y = Caml_ba_array_val(vY);
+    float *y = (float *) Y->data;
     int N = Long_val(vN);
 
-    float *x = (float *) calloc(N, sizeof(float));
-    float *y = (float *) calloc(N, sizeof(float));
-    if (x == NULL || y == NULL) exit(1);
-    memset(x, 1, sizeof(float) * N);
+    fprintf(stderr, "Compute on %d elements\n", N);
+
+    caml_release_runtime_system();
 
     omp_set_num_threads(NUM_THREADS);
     #pragma omp parallel for schedule(static)
@@ -32,6 +36,8 @@ CAMLprim value stub_compute(value vN)
         float foo = x[i];
         y[i] = sinf(cos(sin(cos(tan(log(sin(exp(sin(foo)))))))));
     }
+
+    caml_acquire_runtime_system();
 
     CAMLreturn(Val_unit);
 }
