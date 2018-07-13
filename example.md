@@ -4,8 +4,10 @@ Here is an example to use this dummy library:
 
 ```ocaml
 #require "dummy";;
-let f () = Dummy.compute 100000000;;
-Owl_utils.time f;;
+let _ =
+  let n = 100000000 in
+  let x = Dummy.create n in
+  Dummy.(compute SIN x |> compute SIN |> compute SIN |> compute SIN |> compute SIN |> compute SIN |> compute SIN)
 ```
 
 Note that `compute` function returns nothing.

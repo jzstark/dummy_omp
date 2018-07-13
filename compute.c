@@ -14,7 +14,7 @@
 #include <omp.h>
 #define NUM_THREADS 4
 
-CAMLprim value stub_compute(value vN, value vX, value vY)
+CAMLprim value c_stub_sin(value vN, value vX, value vY)
 {
     CAMLparam3(vN, vX, vY);
 
@@ -34,7 +34,8 @@ CAMLprim value stub_compute(value vN, value vX, value vY)
         //int id = omp_get_thread_num();
         //fprintf(stderr, "ID:%d\n", id);
         float foo = x[i];
-        y[i] = sinf(cos(sin(cos(tan(log(sin(exp(sin(foo)))))))));
+        //y[i] = sinf(cos(sin(cos(tan(log(sin(exp(sin(foo)))))))));
+        y[i] = sinf(foo);
     }
 
     caml_acquire_runtime_system();
