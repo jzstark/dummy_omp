@@ -1,0 +1,20 @@
+(jbuild_version 1)
+
+(copy_files# core/*)
+(copy_files# dense/*)
+
+(library (
+  (name dummy)
+  (public_name dummy)
+  (wrapped false)
+  (c_names (
+    compute_stub
+  ))
+  (c_flags         ((-fopenmp)))
+  (c_library_flags ((-lopenblas -lm -L/opt/OpenBLAS/lib/ -lgomp)))
+  (flags           ((:standard -safe-string)))
+  (libraries (
+    ctypes
+    ctypes.stubs
+  ))
+))
